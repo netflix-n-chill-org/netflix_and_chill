@@ -1,2 +1,6 @@
 # netflix_and_chill
-1. Thơ Nguyễn
+# Team members:
+## 1. Tho Nguyen
+## 2. Hieu Nguyen
+## 3. Thao Nguyen
+## 4. Viet Vu
