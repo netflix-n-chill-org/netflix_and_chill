@@ -40,8 +40,10 @@
             <tr>
                 <td><c:out value="${user.id}"/></td>
 
-                <td>
+                <td >
+                    <a href="/users?action=view&id=${user.getId()}">
                     <c:out value="${user.name}"/>
+                    </a>
                 </td>
 
                 <td>
@@ -54,6 +56,9 @@
 
                 <td>
                     <a href="${pageContext.request.contextPath}/users?action=update&id=${user.id}">Edit</a>
+                </td>
+                <td>
+                    <a href="${pageContext.request.contextPath}/users?action=delete&id=${user.id}">Delete</a>
                 </td>
                 <td>
                     <a href="${pageContext.request.contextPath}/users?action=delete&id=${user.id}">Delete</a>
