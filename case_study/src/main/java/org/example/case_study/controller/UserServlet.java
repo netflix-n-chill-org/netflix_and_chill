@@ -1,7 +1,7 @@
 package org.example.case_study.controller;
 
-import org.example.case_study.model.Impl.UserDao;
-import org.example.case_study.model.User;
+import org.example.case_study.entity.User;
+import org.example.case_study.repository.Impl.UserImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,11 +16,11 @@ import java.util.List;
 @WebServlet(name = "UserServlet", value = "/users")
 public class UserServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private UserDao userDao;
+    private UserImpl userDao;
 
     @Override
     public void init() throws ServletException {
-        userDao = new UserDao();
+        userDao = new UserImpl();
     }
 
     private void addUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
@@ -38,9 +38,9 @@ public class UserServlet extends HttpServlet {
         String name = request.getParameter("name");
         int phone = Integer.parseInt(request.getParameter("phone"));
         String email = request.getParameter("email");
-        User profile = new User(id,name, phone, email);
+        User profile = new User(id, name, phone, email);
         userDao.updateProfile(profile);
-        request.setAttribute("message","This profile was updated");
+        request.setAttribute("message", "This profile was updated");
         RequestDispatcher dispatcher = request.getRequestDispatcher("user/update.jsp");
         dispatcher.forward(request, response);
     }
@@ -53,7 +53,6 @@ public class UserServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("user/list.jsp");
         dispatcher.forward(request, response);
     }
-
 
 
     @Override
@@ -96,6 +95,7 @@ public class UserServlet extends HttpServlet {
         request.setAttribute("user", existingUser);
         dispatcher.forward(request, response);
     }
+
     private void listUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
         List<User> listUser = userDao.showAllUsers();
         request.setAttribute("listUser", listUser);
@@ -129,3 +129,4 @@ public class UserServlet extends HttpServlet {
         }
     }
 }
+

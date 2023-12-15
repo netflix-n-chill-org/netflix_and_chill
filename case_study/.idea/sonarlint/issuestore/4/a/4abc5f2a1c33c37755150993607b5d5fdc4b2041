@@ -1,0 +1,10 @@
+
+u	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(õ¾×K8ÀîÜÆ1
+v	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(±øûã8ÁîÜÆ1
+v	java:S115	"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(à¼´Á8ÁîÜÆ1
+\
+java:S1118":Add a private constructor to hide the implicit public one.(¢Èâßÿÿÿÿÿ8ÂîÜÆ1
+O
+java:S4925"-Remove this "Class.forName()", it is useless.(¹µÖÁüÿÿÿÿ8ÅîÜÆ1
+S
+java:S6437"6Revoke and change this password, as it is compromised.(¦ÎçŒ8ÅîÜÆ1

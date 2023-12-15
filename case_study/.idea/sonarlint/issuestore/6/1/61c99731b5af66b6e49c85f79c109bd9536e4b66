@@ -1,0 +1,28 @@
+
+d
+java:S11925"NDefine a constant instead of duplicating this literal "user/list.jsp" 3 times.(Àûú¨
+d
+java:S11924"IDefine a constant instead of duplicating this literal "listUser" 3 times.(İûàøÿÿÿÿ
+f
+java:S1301B"KReplace this "switch" statement by "if" statements to increase readability.(ë´åİşÿÿÿÿ
+<	java:S131B""Add a default case to this switch.(ë´åİşÿÿÿÿ
+ƒ
+java:S1989D"aHandle the following exceptions that could be thrown by "addUser": ServletException, IOException.(œ˜Ø‡şÿÿÿÿ8Ä„äÜÆ1
+†
+java:S1989G"dHandle the following exceptions that could be thrown by "updateUser": ServletException, IOException.(—§ÁŒıÿÿÿÿ8Å„äÜÆ1
+c
+java:S1989K"AHandle the "ServletException" thrown here in a "try/catch" block.(¨ööŠûÿÿÿÿ8Å„äÜÆ1
+‹
+java:S1130O"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(”°ê½8Æ„äÜÆ1
+Š
+java:S1130\"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(ç²ıv8Ï„äÜÆ1
+
+java:S1130c"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(•Ã”ˆıÿÿÿÿ8Õ„äÜÆ1
+‡
+java:S1989s"eHandle the following exceptions that could be thrown by "showAddForm": ServletException, IOException.(Ş¥Š—şÿÿÿÿ8Û„äÜÆ1
+Š
+java:S1989v"hHandle the following exceptions that could be thrown by "showUpdateForm": ServletException, IOException.(ìÖ›«øÿÿÿÿ8Ü„äÜÆ1
+
+java:S1989y"dHandle the following exceptions that could be thrown by "deleteUser": ServletException, IOException.(…»“‡8Ş„äÜÆ1
+„
+java:S1989|"bHandle the following exceptions that could be thrown by "listUser": IOException, ServletException.(ÁÄ›êşÿÿÿÿ8á„äÜÆ1

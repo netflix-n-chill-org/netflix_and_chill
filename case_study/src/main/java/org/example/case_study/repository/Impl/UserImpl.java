@@ -1,12 +1,14 @@
-package org.example.case_study.model.Impl;
+package org.example.case_study.repository.Impl;
 
-import org.example.case_study.model.User;
+import org.example.case_study.config.ConnectionConfig;
+import org.example.case_study.entity.User;
+import org.example.case_study.repository.IUserRepository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDao implements IUserDao {
+public class UserImpl implements IUserRepository {
     private static final String jdbcURL = "jdbc:mysql://localhost:3306/case_study_03?useSSL=false";
     private static final String jdbcUserName = "root";
     private static final String jdbcPassWord = "D@ll123456";
@@ -17,7 +19,7 @@ public class UserDao implements IUserDao {
     private static final String SHOW_ALL_USERS = "SELECT id, name, phone, email FROM user where status = 0;";
 
 
-    public UserDao() {
+    public UserImpl() {
     }
 
     protected Connection getConnection() {
@@ -111,6 +113,29 @@ public class UserDao implements IUserDao {
         }
         return user;
     }
+
+
+    public List<User> searchByUserName(String keyword) throws SQLException {
+        List<User> userList = new ArrayList<>();
+        Connection connection = ConnectionConfig.getConnection();
+        String query = "SELECT * FROM USER WHERE USERNAME LIKE ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, "%" + keyword + "%");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                userList.add(new User(
+                        resultSet.getInt("id"),
+                        resultSet.getString("userName")));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
+        }
+        return userList;
+    }
+
 
     private void printSQLException(SQLException ex) {
         for (Throwable e : ex) {

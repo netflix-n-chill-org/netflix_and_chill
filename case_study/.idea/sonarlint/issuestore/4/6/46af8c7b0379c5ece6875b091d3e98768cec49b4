@@ -1,0 +1,13 @@
+
+
+java:S4165"fRemove this useless assignment; "username" already holds the assigned value along all execution paths.(π„ªύÿÿÿÿ8κκάΖ1
+
+java:S4165"fRemove this useless assignment; "username" already holds the assigned value along all execution paths.(π„ªύÿÿÿÿ8λκάΖ1
+L
+java:S1172"/Remove this unused method parameter "userName".(Ϊ“ΐ8νκάΖ1
+L
+java:S1172"/Remove this unused method parameter "userName".(–Ν²©8ξκάΖ1
+Q
+java:S1656"/Remove or correct this useless self-assignment.(π„ªύÿÿÿÿ8ρκάΖ1
+Q
+java:S1656"/Remove or correct this useless self-assignment.(π„ªύÿÿÿÿ8ςκάΖ1
