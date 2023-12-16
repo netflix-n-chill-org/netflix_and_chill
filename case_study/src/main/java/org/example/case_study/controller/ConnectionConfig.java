@@ -1,4 +1,4 @@
-package org.example.case_study.config;
+package org.example.case_study.controller;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,6 +1,6 @@
 package org.example.case_study.repository.Impl;
 
-import org.example.case_study.config.ConnectionConfig;
+import org.example.case_study.controller.ConnectionConfig;
 import org.example.case_study.entity.User;
 import org.example.case_study.repository.IUserRepository;
 
@@ -112,28 +112,6 @@ public class UserImpl implements IUserRepository {
             printSQLException(e);
         }
         return user;
-    }
-
-
-    public List<User> searchByUserName(String keyword) throws SQLException {
-        List<User> userList = new ArrayList<>();
-        Connection connection = ConnectionConfig.getConnection();
-        String query = "SELECT * FROM USER WHERE USERNAME LIKE ?";
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, "%" + keyword + "%");
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                userList.add(new User(
-                        resultSet.getInt("id"),
-                        resultSet.getString("userName")));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            connection.close();
-        }
-        return userList;
     }
 
 

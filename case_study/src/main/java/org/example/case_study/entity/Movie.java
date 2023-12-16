@@ -11,6 +11,26 @@ public class Movie {
 
     }
 
+    public Movie(int id, String title) {
+        this.id = id;
+        this.title = title;
+    }
+
+    public Movie(String title, String genre, int releaseYear, float rating) {
+        this.title = title;
+        this.genre = genre;
+        this.releaseYear = releaseYear;
+        this.rating = rating;
+    }
+
+    public Movie(int id, String title, String genre, int releaseYear, float rating) {
+        this.id = id;
+        this.title = title;
+        this.genre = genre;
+        this.releaseYear = releaseYear;
+        this.rating = rating;
+    }
+
     public int getId() {
         return id;
     }

@@ -15,5 +15,4 @@ public interface IUserRepository {
 
     User selectUser(int id);
 
-    List<User> searchByUserName(String keyword) throws SQLException;
 }

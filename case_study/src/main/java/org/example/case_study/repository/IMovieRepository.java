@@ -10,12 +10,12 @@ public interface IMovieRepository {
 
     void addMovie(Movie movie) throws SQLException;
 
-    boolean movieUpdate(Movie movie) throws SQLException;
+    boolean updateMovie(Movie movie) throws SQLException;
 
     boolean deleteMovie (int id) throws SQLException;
 
     List<Movie> showAllMovies();
 
-    List<User> SearchForMovieName(String keyword);
+    List<Movie> searchForMovie(String keyword) throws SQLException;
 
 }
