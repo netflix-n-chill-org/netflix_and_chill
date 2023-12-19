@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: HP
@@ -409,14 +410,27 @@
         </div>
         <div class="right">
             <p style="color: rgba(243, 243, 243, 0.85); ">Trẻ em</p>
-            <a href="#"><img src="https://cdn.picpng.com/bell/bell-notification-communication-67055.png"  alt="Icon thông báo"></a>
+            <a href="#"><img src="https://cdn.picpng.com/bell/bell-notification-communication-67055.png" alt="Icon thông báo"></a>
             <div class="dropdown">
-                <img src="img/red.jpg" alt="Hình đại diện người dùng" class="dropbtn">
-                <div class="dropdown-content">
-                    <a href="#">Link 1</a>
-                    <a href="user/manager.jsp">Manager Profiles</a>
-                    <a href="#">Link 3</a>
-                </div>
+                <c:if test="${sessionScope.loggedInUser != null}">
+
+                  <a href="${pageContext.request.contextPath}/users" >
+                    <img src="img/red.jpg" alt="Hình đại diện người dùng" class="dropbtn">
+                  </a>
+                    <div class="dropdown-content">
+                        <a href="${pageContext.request.contextPath}/users">Link 1</a>
+                        <a href="${pageContext.request.contextPath}/users"><c:out value="Chào mừng, ${sessionScope.loggedInUser.name}" /></a>
+                        <a href="${pageContext.request.contextPath}/users">Link 3</a>
+                    </div>
+                </c:if>
+                <c:if test="${sessionScope.loggedInUser == null}">
+                    <img src="img/red.jpg" alt="Hình đại diện người dùng" class="dropbtn">
+                    <div class="dropdown-content">
+                        <a href="#">Link 1</a>
+                        <a href="user/manager.jsp">Manager Profiles</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </c:if>
             </div>
         </div>
     </nav>

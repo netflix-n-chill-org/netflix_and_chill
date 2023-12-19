@@ -1,18 +1,23 @@
 <%--
   Created by IntelliJ IDEA.
   User: HP
-  Date: 12/13/2023
-  Time: 4:37 PM
+  Date: 12/19/2023
+  Time: 8:41 AM
+  To change this template use File | Settings | File Templates.
+--%>
+<%--
+  Created by IntelliJ IDEA.
+  User: apple
+  Date: 13/12/2023
+  Time: 15:31
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Netflix</title>
+    <title>Change password</title>
     <link rel="icon" href="../img/logo/logo.png" type="image/png">
-
     <style>
         * {
             margin: 0;
@@ -53,80 +58,82 @@
         .header .navbar .right button {
             font-size: 18px;
             font-weight: 400;
+            padding: 7px 17px;
+            background-color: #e50914;
             cursor: pointer;
             outline: none;
+            border-radius: 4px;
             border: none;
         }
 
         .header .navbar .right button a {
             text-decoration: none;
-            color: #000;
-            background-color: white;
+            color: white;
         }
 
         .content {
+            width: 100%;
             display: flex;
             justify-content: center;
-            margin: 0;
-            padding: 0;
+            padding: 40px 0;
         }
-
         .box {
-            width: 35%;
+            width: 40%;
             padding: 20px;
-            background-color: #fff;
-            text-align: left
+            box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+            border-radius: 8px;
         }
-
-        .form-group-1 {
-            padding-top: 20px;
-            position: relative;
-            flex-wrap: wrap;
-            line-height: 1.125rem;
-            display: flex;
-        }
-
-        .button {
-            background-color: #e50914;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            padding: 20px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            display: block;
-            width: 100%;
-            margin-top: 30px
-        }
-
-        .phone-input-container {
-            text-align: center;
-            position: relative;
+        .box form {
             margin-top: 20px;
         }
 
-        .phone-prefix {
-            position: absolute;
-            top: 50%;
-            left: 20px;
-            transform: translateY(-50%);
-            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/1280px-Flag_of_Vietnam.svg.png');
-            background-repeat: no-repeat;
-            background-size: 30px;
-            width: 30px;
-            height: 20px;
-            z-index: 1;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table td {
+            padding: 10px 5px;
+            white-space: nowrap;
+            vertical-align: top;
+        }
+        label {
+            margin-bottom: 5px;
         }
 
-        .phone-input {
+        label {
+            display: block;
+        }
+        td label input[type="password"]{
+            width: 340px;
+        }
+        input[type="password"] {
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        p {
+            margin-top: 5px;
+        }
+
+        #catch {
+            text-align: center;
+            color: red;
+            display: none;
+        }
+
+        input[type="submit"] {
+            background-color: #3174ea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
             font-size: 16px;
-            border: 2px solid #ccc;
-            border-radius: 5px;
-            width: 480px;
-            margin: 10px;
-            padding: 10px 10px 10px 40px;
+            border-radius: 4px;
         }
 
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
         .footer {
             border-top: 1px solid #e6e6e6;
             padding: 30px 10% 10px;
@@ -191,6 +198,7 @@
         }
     </style>
 </head>
+
 <body>
 <div class="header">
     <nav class="navbar">
@@ -206,35 +214,45 @@
 </div>
 <div class="content">
     <div class="box">
-        <p>BƯỚC 3/3</p>
-        <h1 style="color: #333">Thiết lập MoMo</h1>
-        <img src="../img/MOMOPAY.png" width="40px" height="30px"
-             style="float: left;height: 25px;margin: 1px 6px 1px 0;">
+        <h1 style="color: #333">Đổi mật khẩu của bạn</h1>
+        <p style="text-align: left;padding-top: 20px">Bảo vệ tài khoản của bạn bằng một mật khẩu duy nhất dài ít nhất 6 ký tự.
+        </p>
         <br>
-        <p style="text-align: left;padding-top: 20px">Hãy nhập số điện thoại di động MoMo của bạn</p>
-        <p style="padding-top: 10px">Chúng tôi cũng sẽ dùng số điện thoại của bạn nếu bạn quên mật khẩu, cũng như để gửi
-            các tin nhắn quan trọng về tài khoản. Bạn có thể phải trả phí tin nhắn SMS.</p>
-        <p style="color: #777777;font-size:12px;padding-top: 20px">Bằng cách đánh dấu vào hộp kiểm bên dưới, bạn đồng ý
-            với <span style="color:#0071eb">  Điều khoản sử dụng, Tuyên bố về quyền riêng tư</span> của chúng tôi, đồng
-            thời xác nhận rằng bạn trên 18 tuổi. Netflix sẽ tự động gia hạn tư cách thành viên của bạn và tính phí thành
-            viên (hiện tại là 70.000 ₫/tháng) vào phương thức thanh toán của bạn cho đến khi bạn hủy. Bạn có thể hủy bất
-            kỳ lúc nào để tránh bị tính phí về sau.</p>
-       <form method="post" action="/signup/mobileWalletOption">
-        <div class="form-group-1">
-            <input type="checkbox" id="special-offers" name="special-offers" style="width: 20px;height: 20px">
-            <label for="special-offers" class="special-offers" style="padding-left: 10px">Tôi dồng ý.</label>
-        </div>
-        <div class="phone-input-container">
-            <div class="phone-prefix"></div>
-            <input type="tel" class="phone-input" placeholder="Nhập số điện thoại...">
-        </div>
-            <button class="button" style="color:white;" type="submit">Kích hoạt tư cách thành viên</button>
-
-        <p style="text-align: center;padding-top: 20px;padding-bottom: 100px">Bạn sẽ được chuyển đến MoMo để hoàn tất
-            việc thanh toán.</p>
-       </form>
+        <form action="${pageContext.request.contextPath}/login/changePass" method="post">
+            <table>
+                <tr>
+                    <td>Enter new password: </td>
+                    <td>
+                        <label>
+                            <input type="password" name="newPass" id="newPass" oninput="change();check()">
+                        </label>
+                        <p style="color: red; display: none" id="size1" >Between 5 and 60 characters</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Enter new password again: </td>
+                    <td>
+                        <label>
+                            <input type="password" name="newPassAgain" id="newPassAgain" oninput="change();check()">
+                        </label>
+                        <p style="color: red; display: none" id="size2" >Between 5 and 60 characters</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="align-items: center; color: red ; display: none " id="catch" >Not catch</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <label>
+                            <input type="submit" value="Change password">
+                        </label>
+                    </td>
+                </tr>
+            </table>
+        </form>
     </div>
 </div>
+
 <div class="footer">
     <h2>Bạn có câu hỏi? Liên hệ với chúng tôi.</h2>
     <div class="row">
@@ -260,4 +278,45 @@
     </div>
 </div>
 </body>
+<script>
+    function change() {
+        document.getElementById("catch").style.display = "none";
+        document.getElementById("size1").style.display = "none";
+        document.getElementById("size2").style.display = "none";
+    }
+
+    function check1() {
+        let pass = document.getElementById("newPass").value;
+        if (pass.length > 0 && (pass.length < 5 || pass.length > 60)) {
+            document.getElementById("size1").style.display = "block";
+            return false;
+        }
+        return true;
+    }
+
+    function check2() {
+        let pass = document.getElementById("newPassAgain").value;
+        if (pass.length > 0 && (pass.length < 5 || pass.length > 60)) {
+            document.getElementById("size2").style.display = "block";
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function check3() {
+        let pass = document.getElementById("newPassAgain").value;
+        let passAgain = document.getElementById("newPass").value;
+        if (check1() === true && check2() === true && pass !== passAgain) {
+            document.getElementById("catch").style.display = "block";
+        }
+    }
+
+    function check() {
+        setTimeout(check1, 2000);
+        setTimeout(check2, 2000);
+        setTimeout(check3, 1000);
+    }
+</script>
 </html>
+

@@ -5,6 +5,8 @@
   Time: 10:23 AM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -18,6 +20,7 @@
             box-sizing: border-box;
             font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu, sans-serif;
         }
+
         body {
             color: black;
             height: 100vh;
@@ -46,6 +49,7 @@
             width: 150px;
             cursor: pointer;
         }
+
         .header .navbar .right button {
             font-size: 18px;
             font-weight: 400;
@@ -61,7 +65,8 @@
             text-decoration: none;
             color: white;
         }
-        .content{
+
+        .content {
             align-items: center;
             background-color: #fff;
             border-radius: 8px;
@@ -70,6 +75,7 @@
             padding-top: 40px;
             padding-bottom: 120px;
         }
+
         .button {
             background-color: #e50914;
             color: #fff;
@@ -81,23 +87,27 @@
             display: block;
             width: 100%;
         }
+
         .instruction {
             color: #333;
             margin-bottom: 20px;
         }
-        .instruction h1{
+
+        .instruction h1 {
             display: inline-block;
             font-size: 30px;
             max-width: 500px;
             font-weight: 500;
             padding-bottom: 20px;
         }
-        .instruction p{
+
+        .instruction p {
             display: inline-block;
             max-width: 400px;
             font-size: 17px;
             font-weight: 400;
         }
+
         .step {
             text-align: left;
             color: #333;
@@ -105,72 +115,86 @@
             margin-bottom: 10px;
 
         }
+
         .form-group {
             margin-bottom: 15px;
         }
-        .form-group-1{
+
+        .form-group-1 {
             position: relative;
             flex-wrap: wrap;
             line-height: 1.125rem;
             display: flex;
         }
+
         label {
             display: block;
             margin-bottom: 5px;
         }
+
         input[type="text"],
         input[type="password"],
         input[type="email"],
-        input[type="tel"]{
+        input[type="tel"] {
             width: 100%;
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 5px;
         }
-        #special-offers{
+
+        #special-offers {
+            padding:20px 0;
             position: absolute;
-            width:20px;
+            width: 20px;
             height: 20px;
         }
+
         .special-offers {
             margin-left: 30px;
             font-size: 1rem;
             color: rgb(0, 0, 0);
         }
-        .footer{
+
+        .footer {
             border-top: 1px solid #e6e6e6;
             padding: 30px 10% 10px;
-            color:#777;
+            color: #777;
             background-color: #f3f3f3;
         }
-        .footer h2{
+
+        .footer h2 {
             font-size: 18px;
             font-weight: 400;
             margin-bottom: 30px;
         }
-        .footer .column{
+
+        .footer .column {
             flex-basis: 25%;
             flex-grow: 1;
-            margin-bottom:20px;
+            margin-bottom: 20px;
         }
-        .footer .column a{
+
+        .footer .column a {
             display: block;
             text-decoration: none;
-            color:#737373;
+            color: #737373;
             font-size: 15px;
             margin-bottom: 10px;
         }
-        .footer .row{
+
+        .footer .row {
             align-items: flex-start;
             padding: 10px 0;
             border-bottom: none;
         }
-        .column select{
+
+        .column select {
             padding: 10px;
             border: none;
         }
-        .footer .language{
-            color:#333;
+
+        .footer .language {
+            color: #333;
             font-size: 16px;
             height: 48px;
             padding: 10px 30px 12px 10px;
@@ -178,10 +202,12 @@
             border: 1px solid #a6a6a6;
             margin-top: 10px;
         }
-        .column p{
+
+        .column p {
             margin-top: 10px;
-            color:white;
+            color: white;
         }
+
         .row {
             display: flex;
             width: 100%;
@@ -189,18 +215,21 @@
             flex-wrap: wrap;
             padding: 50px;
             margin-bottom: 20px;
-            border-bottom: 8px solid#383737;
+            border-bottom: 8px solid #383737;
         }
+
         /* Responsive Styles */
         @media only screen and (max-width: 600px) {
             .header .navbar {
                 flex-direction: column;
                 padding: 10px;
             }
+
             .content {
                 padding-top: 50px;
                 padding-bottom: 50px;
             }
+
             .footer .row {
                 flex-direction: column;
             }
@@ -224,30 +253,37 @@
     <div class="instruction">
         <div class="step">BƯỚC 1/3</div>
         <h1>Tạo mật khẩu để bắt đầu tư cách thành viên của bạn</h1>
-        <form action="${pageContext.request.contextPath}/signup" method="post">
+        <form action="${pageContext.request.contextPath}/signup/regform" method="post">
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" value="<%= session.getAttribute("processedEmail") %>">
+                <input type="email" id="email" name="email" value="${emailSignUp}">
+                <c:if test="${existEmail == true}">
+                    <p style="color: red">Email exist</p>
+                </c:if>
+                <c:if test="${emailCheck == false}">
+                    <p style="color:red">Wrong email syntax</p>
+                </c:if>
             </div>
             <div class="form-group">
                 <label for="name">Họ và tên</label>
-                <input type="text" id="name" name="name" class="form-input" placeholder="Nhập họ tên của bạn">
+                <input type="text" id="name" name="name" class="form-input" placeholder="Nhập họ tên của bạn" required>
             </div>
             <div class="form-group">
                 <label for="username">Tài khoản</label>
-                <input type="text" id="username" name="username" class="form-input" placeholder="Nhập tài khoản của bạn">
+                <input type="text" id="username" name="username" class="form-input"
+                       placeholder="Nhập tài khoản của bạn">
             </div>
             <div class="form-group">
                 <label for="password">Mật khẩu</label>
-                <input type="password" id="password" name="password" placeholder="Nhập mật khẩu của bạn">
-            </div>
+                <input type="password" id="password" name="password" placeholder="Nhập mật khẩu của bạn" oninput="check();change()" >            </div>
             <div class="form-group">
                 <label for="phone">Số điện thoại</label>
                 <input type="tel" id="phone" name="phone" placeholder="Nhập số điện thoại của bạn">
             </div>
             <div class="form-group-1">
-                <input type="checkbox" id="special-offers" name="special-offers" value="on" onclick="handleCheckboxClick()">
-                <label for="special-offers" class="special-offers">Vui lòng không gửi các ưu đãi đặc biệt của Netflix qua email cho tôi.</label>
+                <input type="checkbox" id="special-offers" name="special-offers" value="on"
+                       onclick="handleCheckboxClick()">
+                <label for="special-offers" class="special-offers">Bấm vào đây để nhận mã khuyến mãi từ chúng tôi.</label>
             </div>
             <button class="button" style="color:white;" type="submit">Tiếp theo</button>
         </form>
@@ -278,7 +314,7 @@
         </div>
     </div>
 </div>
-<script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js">
     function handleCheckboxClick() {
         var checkbox = document.getElementById("special-offers");
         if (checkbox.checked) {
@@ -287,6 +323,22 @@
                 .then(data => console.log(data))
                 .catch(error => console.error(error));
         }
+    }
+    function check1() {
+        let pass = document.getElementById("password").value;
+
+        if (pass.length > 0 && (pass.length < 6 || pass.length > 60)) {
+            document.getElementById("check").style.display = "block";
+            document.getElementById("check").innerHTML = "Enter pass between 6 and 60 characters"
+        }
+    }
+
+    function check() {
+        setTimeout(check1, 1000);
+    }
+
+    function change() {
+        document.getElementById("check").style.display = "none";
     }
 </script>
 </body>
