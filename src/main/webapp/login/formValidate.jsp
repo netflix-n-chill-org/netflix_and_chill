@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: HP
-  Date: 12/13/2023
-  Time: 3:47 PM
+  Date: 12/18/2023
+  Time: 10:23 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -22,7 +22,8 @@
         }
 
         body {
-            color: black;
+            background-color: #000000;
+            color: #fff;
             height: 100vh;
             margin: 0;
         }
@@ -32,9 +33,8 @@
             position: absolute;
             height: 100%;
             width: 100%;
-            opacity: 0.6;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.8) 100%), url(../img/log-out.jpg);
             z-index: -1;
-
         }
 
         .header .navbar {
@@ -42,7 +42,6 @@
             align-items: center;
             justify-content: space-between;
             padding: 20px 140px;
-            border-bottom: 1px solid #e6e6e6;
         }
 
         .logo {
@@ -53,64 +52,134 @@
         .header .navbar .right button {
             font-size: 18px;
             font-weight: 400;
+            padding: 7px 17px;
+            background-color: #e50914;
             cursor: pointer;
             outline: none;
+            border-radius: 4px;
             border: none;
         }
 
         .header .navbar .right button a {
             text-decoration: none;
-            color: #000;
-            background-color: white;
+            color: white;
         }
 
+        .header-content h1 {
+            font-size: 50px;
+            line-height: 1.2;
+            max-width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .header-content h3 {
+            font-weight: 400;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
         .content {
             display: flex;
             justify-content: center;
             margin: 0;
-            padding: 0;
+            padding: 40px;
         }
 
         .box {
-            width: 40%;
-            padding: 20px;
-            background-color: #fff;
-            text-align: center;
-
+            background-color: #f0f0f0;
+            padding: 40px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 30%;
+            height: 500px;
+            margin: auto;
         }
 
-        .option {
-            display: flex;
-            align-items: center;
-            background-color: white;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+        .reset-form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #000;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #000;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .reset-option {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .radio-group {
+            margin-left: 20px;
+            font-size: 18px;
+        }
+
+        .radio-group label {
+            display: block;
+            margin-bottom: 10px;
+            color:#000;
+        }
+
+        .radio-group input[type="radio"] {
+            margin-right: 5px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        .reset-instruction {
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        input[type="email"] {
+            width: calc(100% - 16px);
+            padding: 8px;
+            font-size: 16px;
+            margin-bottom: 30px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: #fff;
             padding: 10px;
-            margin: 10px;
-            position: relative;
-            transition: position .5s ease-in;
-            width: 100%;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: calc(100% - 16px);
         }
 
-        .option::after {
-            content: ">";
-            font-size: 20px;
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
+        input[type="submit"]:hover {
+            background-color: #0056b3;
         }
 
-        .option img {
-            vertical-align: middle;
-            margin-left: 10px;
+        a {
+            color: #007BFF;
+            text-decoration: none;
         }
 
+        a:hover {
+            color: #0056b3;
+        }
         .footer {
-            border-top: 1px solid #e6e6e6;
+            margin-top: 50px;
             padding: 30px 10% 10px;
-            color: #777;
-            background-color: #f3f3f3;
+            color: white;
+            background-color: #000;
+            z-index: -1;
+            opacity: 0.5;
         }
 
         .footer h2 {
@@ -128,7 +197,7 @@
         .footer .column a {
             display: block;
             text-decoration: none;
-            color: #737373;
+            color: white;
             font-size: 15px;
             margin-bottom: 10px;
         }
@@ -169,6 +238,9 @@
             border-bottom: 8px solid #383737;
         }
     </style>
+    <%
+        String email = request.getParameter("username");
+    %>
 </head>
 <body>
 <div class="header">
@@ -179,29 +251,30 @@
             </a>
         </div>
         <div class="right">
-            <button><a href="../login/logout.jsp">Đăng xuất</a></button>
+            <button><a href="">Đăng xuất</a></button>
         </div>
     </nav>
 </div>
 <div class="content">
     <div class="box">
-        <img src="../img/lock.png" width="50px" height="50px">
-        <p style="padding-top: 40px">BƯỚC 3/3</p>
-        <h1 style="color:#333;padding: 10px;">Chọn cách thanh toán</h1>
-        <p style="font-size: 20px;max-width: 500px;text-align: center;display: inline-block;color:#333">Quá trình thanh
-            toán của bạn được mã hóa và bạn có thể thay đổi cách thanh toán bất kỳ lúc nào.</p>
-        <h4 style="font-size: 18px;color:#333;display: inline-block;max-width: 300px;padding-top: 10px">An toàn để an
-            tâm.
-            Hủy trực tuyến dễ dàng.</h4>
-        <form action="${pageContext.request.contextPath}/signup/paymentPicker" method="post">
-            <button type="submit" class="option" size="200">
-                    <p style="font-size: 20px;text-align: left">
-                        Ví điện tử <img src="../img/MOMOPAY.png" alt="" width="40px" height="30px"></p>
-            </button>
+        <form action="/login/forgetPassword?action=form" method="post" class="reset-form">
+            <h1>Quên email/mật khẩu
+            </h1>
+            <p class="reset-option">Bạn muốn đặt lại mật khẩu bằng cách nào?</p>
+            <div class="radio-group">
+                <label><input type="radio" name="form" value="email"> Email</label>
+                <label><input type="radio" name="form" value="sms"> Tin nhắn văn bản (SMS)</label>
+            </div>
+            <p class="reset-instruction">Chúng tôi sẽ gửi cho bạn mã xác thực qua tin nhắn để đặt lại mật khẩu của bạn. Bạn có thể phải trả phí tin nhắn hoặc dữ liệu.
+                .</p>
+            <div class="input-group">
+                <input type="email" name="emailAddress" value="<%=email%>">
+            </div>
+            <input type="submit" value="Gửi email cho tôi">
+            <p style="padding-top: 20px;text-align: left"><a href="#">I don't remember my email or phone.</a></p>
         </form>
     </div>
-</div>
-<div class="footer">
+</div><div class="footer">
     <h2>Bạn có câu hỏi? Liên hệ với chúng tôi.</h2>
     <div class="row">
         <div class="column">

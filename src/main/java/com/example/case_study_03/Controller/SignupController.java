@@ -12,7 +12,7 @@ import java.io.IOException;
 
 import static com.example.case_study_03.Model.dao.MyConnection.getConnection;
 
-@WebServlet(name="SignupController",urlPatterns = "/signup")
+@WebServlet(name="SignupController",urlPatterns = "/a")
 
 public class SignupController extends HttpServlet {
     @Override

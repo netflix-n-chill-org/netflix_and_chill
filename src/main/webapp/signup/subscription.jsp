@@ -5,6 +5,8 @@
   Time: 11:03 AM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -209,9 +211,9 @@
     <div class="service-option">
         <i class="fa-solid fa-check" style="color: #e10909;font-size: 20px"></i><p>Không quảng cáo, không phụ phí. Luôn luôn như vậy</p>
     </div>
-    <a href="planform.jsp" style="text-decoration: none">
+    <form action="${pageContext.request.contextPath}/subscription" method="post">
         <button class="button" style="color:white;">Tiếp theo</button>
-    </a>
+    </form>
 </div>
 </div>
 <div class="footer">
@@ -238,5 +240,23 @@
         </div>
     </div>
 </div>
+<script>
+    localStorage.setItem("lastSignUpStep", "Step2");
+    // let dataToSend = localStorage.getItem("lastSignUpStep");
+    // let userAccount = {
+    //     username: ,
+    //     password:
+    // }
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', '/main', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log(xhr.responseText);
+        }
+    };
+    xhr.send(JSON.stringify({key: dataToSend}))
+</script>
 </body>
 </html>

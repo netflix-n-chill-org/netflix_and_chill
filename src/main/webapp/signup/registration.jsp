@@ -5,6 +5,8 @@
   Time: 8:45 AM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -210,32 +212,32 @@
         <h1>Hoàn thành việc cài đặt tài khoản của bạn. </h1>
         <p>Netflix được cá nhân hóa cho riêng bạn. Tạo một tài khoản để xem Netflix trên bất kỳ thiết bị nào, vào bất cứ lúc nào.</p>
     </div>
-    <a href="regform.jsp" style="text-decoration: none">
+    <form action="/signup/registration" method="post">
         <button class="button" style="color:white;">Tiếp theo</button>
-    </a></div>
-<div class="footer">
-    <h2>Bạn có câu hỏi? Liên hệ với chúng tôi.</h2>
-    <div class="row">
-        <div class="column">
-            <a href="#">Câu hỏi thường gặp</a>
-            <a href="#">Quyền riêng tư</a>
-            <select name="language" class="language">
-                <option value="Vietnamese">🌐Tiếng việt</option>
-                <option value="English">🌐 English</option>
-            </select>
-        </div>
-        <div class="column">
-            <a href="#">Trung tâm trợ giúp</a>
-            <a href="#">Tùy chọn cookie</a>
-        </div>
-        <div class="column">
-            <a href="#">Cửa hàng Netflix</a>
-            <a href="#">Thông tin doanh nghiệp</a>
-        </div>
-        <div class="column">
-            <a href="#">Điều khoản sử dung</a>
+    </form></div>
+    <div class="footer">
+        <h2>Bạn có câu hỏi? Liên hệ với chúng tôi.</h2>
+        <div class="row">
+            <div class="column">
+                <a href="#">Câu hỏi thường gặp</a>
+                <a href="#">Quyền riêng tư</a>
+                <select name="language" class="language">
+                    <option value="Vietnamese">🌐Tiếng việt</option>
+                    <option value="English">🌐 English</option>
+                </select>
+            </div>
+            <div class="column">
+                <a href="#">Trung tâm trợ giúp</a>
+                <a href="#">Tùy chọn cookie</a>
+            </div>
+            <div class="column">
+                <a href="#">Cửa hàng Netflix</a>
+                <a href="#">Thông tin doanh nghiệp</a>
+            </div>
+            <div class="column">
+                <a href="#">Điều khoản sử dung</a>
+            </div>
         </div>
     </div>
-</div>
 </body>
 </html>

@@ -2,6 +2,7 @@ package com.example.case_study_03.Controller;
 
 import com.example.case_study_03.Model.dao.impl.UserDAO;
 import com.example.case_study_03.Model.entity.User;
+import com.example.case_study_03.Model.service.UserService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,13 +25,15 @@ public class UserController extends HttpServlet {
         userDao = new UserDAO(getConnection());
     }
     private void addUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        UserService userService = new UserService(userDao);
         String name = request.getParameter("name");
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
         User newUser = new User(name, phone, email);
-        userDao.addUser(newUser);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("user/add.jsp");
-        dispatcher.forward(request, response);
+        userService.addUser(newUser);
+
+        response.sendRedirect(request.getContextPath() + "/users");
+
     }
 
 
@@ -77,9 +80,10 @@ public class UserController extends HttpServlet {
     private void showAddForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         List<User> users = userDao.showAllUsers();
         if (users.size() == 5) {
-            request.setAttribute("limit", true);
+            request.setAttribute("limit",true);
             request.setAttribute("listUser", users);
             RequestDispatcher dispatcher = request.getRequestDispatcher("user/list.jsp");
+
             dispatcher.forward(request, response);
         } else {
             RequestDispatcher dispatcher = request.getRequestDispatcher("user/add.jsp");
@@ -97,6 +101,7 @@ public class UserController extends HttpServlet {
     private void listUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
         List<User> listUser = userDao.showAllUsers();
         request.setAttribute("listUser", listUser);
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("user/list.jsp");
         dispatcher.forward(request, response);
     }

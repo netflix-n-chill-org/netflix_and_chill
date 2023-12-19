@@ -11,7 +11,7 @@ import java.util.Properties;
 public class SendEmail extends HttpServlet {
     private static final long serialVersionUID =1L;
 
-    void sendSpecialOffer(String recipientEmail) {
+    public void sendSpecialOffer(String recipientEmail) {
         final String username  ="hieun4587@gmail.com";
         final String password ="ysey tqfa gbxe psjg";
         Properties properties = new Properties();
@@ -27,7 +27,6 @@ public class SendEmail extends HttpServlet {
         });
         try {
             String logoUrl = "https://1000logos.net/wp-content/uploads/2017/05/Netflix-Logo.png";
-
             // Tạo đối tượng MimeMessage
             Message message = new MimeMessage(session);
 

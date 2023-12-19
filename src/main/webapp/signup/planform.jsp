@@ -1,8 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <head>
     <title>Netflix</title>
     <link rel="icon" href="../img/logo/logo.png" type="image/png">
+    <link rel="stylesheet" href="../css/signup_main.css">
 
     <style>
         * {
@@ -348,7 +351,7 @@
     </nav>
 </div>
 
-
+<form action="/signup/planform" method="post">
 <div class="cards">
     <div class="card shadow">
         <ul>
@@ -357,9 +360,9 @@
             <li class="bottom-bar">Chất lượng video:Tốt</li>
             <li class="bottom-bar">Số lượng phim: 5</li>
             <li class="bottom-bar">Thưởng thức 1000 phút phim hấp dẫn</li>
-            <li> <a href="paymentPicker.jsp" style="text-decoration: none">
-                <button class="btn">Thanh toán</button>
-            </a></li>
+            <li>
+                <input type="submit" name="plan" value="Đăng ký" class="btn">
+           </li>
         </ul>
     </div>
     <div class="card active">
@@ -369,9 +372,9 @@
             <li class="bottom-bar">Chất lượng video:Tốt hơn</li>
             <li class="bottom-bar">Số lượng phim: 20</li>
             <li class="bottom-bar">Trải nghiệm 2000 phút phim đỉnh cao</li>
-            <li>  <a href="paymentPicker.jsp" style="text-decoration: none">
-            <button class="btn active-btn">Thanh toán</button>
-        </a></li>
+            <li>
+                <input type="submit" name="plan" value="Đăng ký" class="btn active-btn">
+        </li>
         </ul>
     </div>
     <div class="card shadow">
@@ -381,9 +384,10 @@
             <li class="bottom-bar">Chất lượng video:Tốt hơn</li>
             <li class="bottom-bar">Số lượng phim: Không giới hạn</li>
             <li class="bottom-bar">Tận hưởng thế giới phim không giới hạn</li>
-            <li> <a href="paymentPicker.jsp" style="text-decoration: none">
-                <button class="btn">Thanh toán</button>
-            </a></li>
+            <li>
+                <input type="submit" name="plan" value="Đăng ký" class="btn">
+
+          </li>
         </ul>
     </div>
 </div>
@@ -411,5 +415,6 @@
         </div>
     </div>
 </div>
+</form>
 </body>
 </html>

@@ -1,16 +1,15 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
-  User: HP
-  Date: 12/13/2023
-  Time: 3:47 PM
+  User: apple
+  Date: 13/12/2023
+  Time: 15:16
   To change this template use File | Settings | File Templates.
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Netflix</title>
+    <title>Forget Password</title>
     <link rel="icon" href="../img/logo/logo.png" type="image/png">
 
     <style>
@@ -22,7 +21,8 @@
         }
 
         body {
-            color: black;
+            background-color: #000000;
+            color: #fff;
             height: 100vh;
             margin: 0;
         }
@@ -32,9 +32,8 @@
             position: absolute;
             height: 100%;
             width: 100%;
-            opacity: 0.6;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.8) 100%), url(../img/log-out.jpg);
             z-index: -1;
-
         }
 
         .header .navbar {
@@ -42,7 +41,6 @@
             align-items: center;
             justify-content: space-between;
             padding: 20px 140px;
-            border-bottom: 1px solid #e6e6e6;
         }
 
         .logo {
@@ -53,64 +51,78 @@
         .header .navbar .right button {
             font-size: 18px;
             font-weight: 400;
+            padding: 7px 17px;
+            background-color: #e50914;
             cursor: pointer;
             outline: none;
+            border-radius: 4px;
             border: none;
         }
 
         .header .navbar .right button a {
             text-decoration: none;
-            color: #000;
-            background-color: white;
+            color: white;
+        }
+
+        .header-content h1 {
+            font-size: 50px;
+            line-height: 1.2;
+            max-width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .header-content h3 {
+            font-weight: 400;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
         }
 
         .content {
             display: flex;
             justify-content: center;
+            align-items: center;
+            height: 100vh;
             margin: 0;
-            padding: 0;
+            padding: 20px;
         }
 
         .box {
-            width: 40%;
-            padding: 20px;
+            width: 350px;
+            height: 300px;
+            padding: 50px;
             background-color: #fff;
             text-align: center;
-
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 0;
         }
 
-        .option {
-            display: flex;
-            align-items: center;
-            background-color: white;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
-            margin: 10px;
-            position: relative;
-            transition: position .5s ease-in;
-            width: 100%;
+        .box h1, .box p {
+            color: #000;
+            margin-bottom: 10px;
         }
 
-        .option::after {
-            content: ">";
-            font-size: 20px;
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
+        .content button {
+            background-color: #3174ea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            width: 250px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            margin-top: 20px;
         }
 
-        .option img {
-            vertical-align: middle;
-            margin-left: 10px;
+        .content button:hover {
+            background-color: #0056b3;
         }
-
         .footer {
-            border-top: 1px solid #e6e6e6;
+            margin-top: 50px;
             padding: 30px 10% 10px;
-            color: #777;
-            background-color: #f3f3f3;
+            color: white;
+            background-color: #000;
+            z-index: -1;
+            opacity: 0.5;
         }
 
         .footer h2 {
@@ -128,7 +140,7 @@
         .footer .column a {
             display: block;
             text-decoration: none;
-            color: #737373;
+            color: white;
             font-size: 15px;
             margin-bottom: 10px;
         }
@@ -179,26 +191,27 @@
             </a>
         </div>
         <div class="right">
-            <button><a href="../login/logout.jsp">Đăng xuất</a></button>
+            <button><a href="">Đăng xuất</a></button>
         </div>
     </nav>
 </div>
 <div class="content">
     <div class="box">
-        <img src="../img/lock.png" width="50px" height="50px">
-        <p style="padding-top: 40px">BƯỚC 3/3</p>
-        <h1 style="color:#333;padding: 10px;">Chọn cách thanh toán</h1>
-        <p style="font-size: 20px;max-width: 500px;text-align: center;display: inline-block;color:#333">Quá trình thanh
-            toán của bạn được mã hóa và bạn có thể thay đổi cách thanh toán bất kỳ lúc nào.</p>
-        <h4 style="font-size: 18px;color:#333;display: inline-block;max-width: 300px;padding-top: 10px">An toàn để an
-            tâm.
-            Hủy trực tuyến dễ dàng.</h4>
-        <form action="${pageContext.request.contextPath}/signup/paymentPicker" method="post">
-            <button type="submit" class="option" size="200">
-                    <p style="font-size: 20px;text-align: left">
-                        Ví điện tử <img src="../img/MOMOPAY.png" alt="" width="40px" height="30px"></p>
-            </button>
+        <h1>Forget Password</h1>
+        <p>Một đoạn mã đã được gửi đến email của bạn. Vui lòng kiểm tra thư và nhập mã để xác nhận</p>
+        <form action="${pageContext.request.contextPath}/login/forgetPassword" method="post">
+            <label>
+                <input type="text" name="code" oninput="change()" >
+            </label>
+            <c:if test="${codeValidate == false}">
+                <p style="color:red" id="change">Sai mật mã</p>
+            </c:if>
+            <label>
+                <input type="submit" value="gửi email cho tôi">
+            </label>
         </form>
+        <p>Không nhận được mã</p>
+        <a href="${pageContext.request.contextPath}/login/sendCode">Gửi lại mã</a>
     </div>
 </div>
 <div class="footer">
@@ -225,5 +238,11 @@
         </div>
     </div>
 </div>
+
 </body>
+<script>
+    function change() {
+        document.getElementById("change").style.display = "none";
+    }
+</script>
 </html>
