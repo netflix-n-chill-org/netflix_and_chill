@@ -1,6 +1,6 @@
 # Project: netflix_and_chill
 # Team members:
-## 1. Tho Nguyen
+## 1. Viet Vu
 ## 2. Hieu Nguyen
 ## 3. Thao Nguyen
-## 4. Viet Vu
+## 4. Tho Nguyen
