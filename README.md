@@ -1,4 +1,4 @@
-# netflix_and_chill
+# Project: netflix_and_chill
 # Team members:
 ## 1. Tho Nguyen
 ## 2. Hieu Nguyen
