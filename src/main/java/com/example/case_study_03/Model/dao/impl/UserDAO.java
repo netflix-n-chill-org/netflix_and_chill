@@ -15,13 +15,13 @@ public class UserDAO implements IUtilityUserDAO {
 
     private static final String Insert_ALL_USERS = "INSERT INTO user (name,username,password,phone,email) VALUES (?,?,?,?,?)";
     private static final String ADD_USERS_SQL = "INSERT INTO user (name ,phone, email) VALUES (?,?,?)";
-    private static final String UPDATE_USERS_SQL = "UPDATE user set name = ?, phone = ?, email = ? where id = ?;";
-    private static final String UPDATE_PASSWORD = "UPDATE user set name=?, set username= ?, password =?, phone =?, email=? where id = ?;";
+    private static final String UPDATE_USERS_SQL = "UPDATE user set name = ?, phone = ?, email = ? where id = ? and status = 0;";
+    private static final String UPDATE_PASSWORD = "UPDATE user set name=?, set username= ?, password =?, phone =?, email=? where id = ? and status = 0;";
     private static final String DELETE_USERS = "UPDATE user set status = 1 where id = ?;";
-    private static final String SELECT_USER_BY_ID = "SELECT name, phone, email from USER where id = ?;";
+    private static final String SELECT_USER_BY_ID = "SELECT name, phone, email from USER where id = ? and status = 0;";
     private static final String SHOW_ALL_USERS = "SELECT id, name, phone, email FROM user where status = 0;";
     private static final String SHOW_USERNAME_PASSWORD = "SELECT * from user where status = 0;";
-    private final static String SELECT_USER_BY_USERNAME = "select * from user where username = ? or email = ?;";
+        private final static String SELECT_USER_BY_USERNAME = "select * from user where ( username = ? or email = ?) and status = 0;";
 
     private Connection connection;
 
