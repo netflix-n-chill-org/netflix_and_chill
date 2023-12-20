@@ -255,6 +255,19 @@
     function getValue() {
         const username = document.getElementById("username").value;
         localStorage.setItem("usernameLogin", username);
+
+        localStorage.setItem("email", username);
+
+        if (username === getCookie("username")) {
+            if (getCookie("rememberMe") === "true") {
+
+                document.getElementById("password").value = getCookie("password");
+            }
+        }
+        document.getElementById("not").style.display = "none";
+    }
+
+
         document.getElementById("not").style.display = "none";
         localStorage.setItem("email", username);
 

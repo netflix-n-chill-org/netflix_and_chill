@@ -183,7 +183,9 @@
         <p style="color: #000;margin-bottom: 20px;text-align: left;margin-left: 2px">Nhắc nhở, không phải lúc nào bạn
             cũng cần đăng xuất khỏi Netflix đâu. Điều này chỉ cần thiết nếu bạn đang dùng máy tính công cộng hoặc dùng
             chung</p>
-        <button>Thoát ngay</button>
+        <form action="${pageContext.request.contextPath}/confirmLogOut" method="post">
+            <button type="submit">Thoát ngay</button>
+        </form>
     </div>
 </div>
 <div class="footer">

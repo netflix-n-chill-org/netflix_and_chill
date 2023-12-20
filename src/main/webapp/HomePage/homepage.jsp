@@ -131,7 +131,7 @@
 
         .content {
             font-size: 22px;
-            margin-top: 650px;
+            margin-top: 580px;
             border-top: 8px solid #383737;
         }
 

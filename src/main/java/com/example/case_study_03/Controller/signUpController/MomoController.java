@@ -58,6 +58,7 @@ public class MomoController extends HttpServlet {
         }
         User newUser1 =  userService.getUserByUsername(newUser.getEmail());
         LoginManager.getInstance().addUser(newUser1);
+        session.setAttribute("loggedInUser", newUser1);
         resp.addCookie(cookie);
         try {
             Thread.sleep(3000);

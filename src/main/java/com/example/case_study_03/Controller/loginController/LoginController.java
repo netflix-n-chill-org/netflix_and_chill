@@ -59,6 +59,48 @@ public class LoginController extends HttpServlet {
         RequestDispatcher dispatcher;
         session.setAttribute("email", username);
 
+        if(username.equals("admin") && password.equals("admin")){
+            resp.sendRedirect("/movie");
+        }
+        else {
+            if (auth == -1) {
+                User user = (new UserService(userDAO)).getUserByUsername(username);
+                session.setAttribute("currentUser", user);
+                session.setAttribute("signInStep", "2");
+                try {
+                    String rememberMe = req.getParameter("rememberMe");
+
+                    if (rememberMe.equals("true")) {
+
+
+                        Cookie usernameCookie = new Cookie("username", username);
+                        Cookie passwordCookie = new Cookie("password", password);
+                        Cookie rememberMe1 = new Cookie("rememberMe", "true");
+                        // Đặt thời gian sống của cookie (ví dụ: 1 ngày)
+                        usernameCookie.setMaxAge(365 * 24 * 60 * 60);
+                        passwordCookie.setMaxAge(365 * 24 * 60 * 60);
+                        rememberMe1.setMaxAge(365 * 24 * 60 * 60);
+
+                        // Thêm cookie vào phản hồi
+                        resp.addCookie(usernameCookie);
+                        resp.addCookie(passwordCookie);
+                        resp.addCookie(rememberMe1);
+
+                    }
+                } catch (NullPointerException ignored) {
+
+                }
+                UserService userService = new UserService(userDAO);
+                User loginUser = userService.getUserByUsername(username);
+                if (!loginManager.isOnlineUser(loginUser.getId())) {
+                    loginManager.addOnlineUser(loginUser.getId());
+                    session.setAttribute("loggedInUser", user);
+                    resp.sendRedirect("/browse");
+                } else {
+                    dispatcher = req.getRequestDispatcher("login/login.jsp");
+                    req.setAttribute("isOnlineUser", true);
+                    dispatcher.forward(req, resp);
+                }
         if (auth == -1) {
             User user = (new UserService(userDAO)).getUserByUsername(username);
             session.setAttribute("currentUser", user);
@@ -96,9 +138,10 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("loggedInUser", user);
                 resp.sendRedirect("/browse");
             } else {
+                req.setAttribute("auth", auth);
                 dispatcher = req.getRequestDispatcher("login/login.jsp");
-                req.setAttribute("isOnlineUser", true);
                 dispatcher.forward(req, resp);
+                session.setAttribute("email", username);
             }
 
         }else {
