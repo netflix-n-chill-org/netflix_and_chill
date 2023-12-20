@@ -16,8 +16,18 @@ import java.io.IOException;
 public class PlanFormController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher dispatcher = req.getRequestDispatcher("planform.jsp");
-        dispatcher.forward(req, resp);
+        HttpSession session = req.getSession();
+        RequestDispatcher dispatcher;
+        try {
+            if (Integer.parseInt((String) session.getAttribute("signUpStep")) < 4) {
+                resp.sendRedirect("/subscription");
+            } else {
+                dispatcher = req.getRequestDispatcher("planform.jsp");
+                dispatcher.forward(req, resp);
+            }
+        }  catch (NumberFormatException e) {
+            resp.sendRedirect("/main");
+        }
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -29,6 +39,13 @@ public class PlanFormController extends HttpServlet {
         subscription.setName(plan);
         subscription.setUserId(user.getId());
 
-        resp.sendRedirect("/signup/paymentPicker");
+
+        int signUpStep = Integer.parseInt((String) session.getAttribute("signUpStep"));
+        if (signUpStep == 4) {
+            session.setAttribute("signUpStep", "5");
+            resp.sendRedirect("/signup/paymentPicker");
+        } else {
+            resp.sendRedirect("/signup/mobileWalletOption");
+        }
     }
 }

@@ -242,21 +242,7 @@
 </div>
 <script>
     localStorage.setItem("lastSignUpStep", "Step2");
-    // let dataToSend = localStorage.getItem("lastSignUpStep");
-    // let userAccount = {
-    //     username: ,
-    //     password:
-    // }
 
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST', '/main', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log(xhr.responseText);
-        }
-    };
-    xhr.send(JSON.stringify({key: dataToSend}))
 </script>
 </body>
 </html>

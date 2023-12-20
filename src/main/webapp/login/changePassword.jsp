@@ -218,33 +218,34 @@
         <p style="text-align: left;padding-top: 20px">Bảo vệ tài khoản của bạn bằng một mật khẩu duy nhất dài ít nhất 6 ký tự.
         </p>
         <br>
-        <form action="${pageContext.request.contextPath}/login/changePass" method="post">
+        <form id="myForm" action="${pageContext.request.contextPath}/login/changePass" method="post">
             <table>
                 <tr>
-                    <td>Enter new password: </td>
+                    <td>Nhập mật khẩu mới: </td>
                     <td>
                         <label>
-                            <input type="password" name="newPass" id="newPass" oninput="change();check()">
+                            <input type="password" name="newPass" id="newPass" onchange="change();check()">
                         </label>
-                        <p style="color: red; display: none" id="size1" >Between 5 and 60 characters</p>
+                        <p style="color: red; display: none;" id="size1">Mật khẩu phải từ 6 đến 60 ký tự.</p>
                     </td>
                 </tr>
                 <tr>
-                    <td>Enter new password again: </td>
+                    <td>Nhập lại mật khẩu mới:  </td>
                     <td>
                         <label>
-                            <input type="password" name="newPassAgain" id="newPassAgain" oninput="change();check()">
+                            <input type="password" name="newPassAgain" id="newPassAgain" onchange="change();check()">
                         </label>
-                        <p style="color: red; display: none" id="size2" >Between 5 and 60 characters</p>
+                        <p style="color: red; display: none;" id="size2">Mật khẩu phải từ 6 đến 60 ký tự.</p>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2" style="align-items: center; color: red ; display: none " id="catch" >Not catch</td>
+                    <td></td>
+                    <td style="align-items: center; color: red ; display: none " id="catch">Mật khẩu không trùng hợp</td>
                 </tr>
                 <tr>
                     <td colspan="2">
                         <label>
-                            <input type="submit" value="Change password">
+                            <input type="submit" value="Thay đổi mật khẩu">
                         </label>
                     </td>
                 </tr>
@@ -287,7 +288,7 @@
 
     function check1() {
         let pass = document.getElementById("newPass").value;
-        if (pass.length > 0 && (pass.length < 5 || pass.length > 60)) {
+        if (pass.length > 0 && (pass.length < 6 || pass.length > 60)) {
             document.getElementById("size1").style.display = "block";
             return false;
         }
@@ -296,7 +297,7 @@
 
     function check2() {
         let pass = document.getElementById("newPassAgain").value;
-        if (pass.length > 0 && (pass.length < 5 || pass.length > 60)) {
+        if (pass.length > 0 && (pass.length < 6 || pass.length > 60)) {
             document.getElementById("size2").style.display = "block";
             return false;
         } else {
@@ -307,16 +308,34 @@
     function check3() {
         let pass = document.getElementById("newPassAgain").value;
         let passAgain = document.getElementById("newPass").value;
-        if (check1() === true && check2() === true && pass !== passAgain) {
+        console.log(pass.length);
+        let check1 = pass.length >=6 && pass.length <= 60;
+        let check2 = passAgain.length >=6 && passAgain.length <= 60;
+        console.log(pass.length);
+        if (check1 === true && check2 === true && pass !== passAgain) {
             document.getElementById("catch").style.display = "block";
         }
     }
 
     function check() {
-        setTimeout(check1, 2000);
-        setTimeout(check2, 2000);
-        setTimeout(check3, 1000);
+        setTimeout(check1, 500);
+        setTimeout(check2, 500);
+        setTimeout(check3, 500);
     }
+
+    function handleSubmit(event) {
+        event.preventDefault();
+        check();
+        let pass = document.getElementById("newPass").value;
+        let pass1 = document.getElementById("newPassAgain").value;
+        if (pass.length >= 6 && pass.length <= 60 && pass === pass1) {
+            event.target.submit();
+        }
+    }
+
+    let myForm = document.getElementById("myForm");
+
+    myForm.addEventListener("submit", handleSubmit);
 </script>
 </html>
 

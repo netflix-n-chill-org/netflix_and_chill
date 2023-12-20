@@ -16,15 +16,22 @@ public class BrowseController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        User loggedInUser = (User) session.getAttribute("loggedInUser");
-        if (loggedInUser != null) {
-            String name = loggedInUser.getName();
-            req.setAttribute("name", name);
-            RequestDispatcher dispatcher = req.getRequestDispatcher("browse.jsp");
-            dispatcher.forward(req, resp);
-        } else {
-            resp.sendRedirect(req.getContextPath() + "/login/login.jsp");
+        RequestDispatcher dispatcher;
+        try {
+            if (Integer.parseInt((String) session.getAttribute("signInStep")) < 1) {
+                resp.sendRedirect("/login");
+            } else {
+                dispatcher = req.getRequestDispatcher("browse.jsp");
+                dispatcher.forward(req, resp);
+            }
+        }   catch (NumberFormatException e) {
+            resp.sendRedirect("/login");
         }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doPost(req, resp);
     }
 
 

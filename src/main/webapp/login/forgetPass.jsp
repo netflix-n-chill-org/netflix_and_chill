@@ -88,34 +88,62 @@
 
         .box {
             width: 350px;
-            height: 300px;
-            padding: 50px;
+            height: auto;
+            padding: 30px;
             background-color: #fff;
             text-align: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 0;
+            border-radius: 8px;
         }
 
         .box h1, .box p {
-            color: #000;
-            margin-bottom: 10px;
+            color: #333;
+            margin-bottom: 15px;
         }
 
-        .content button {
+        .content label {
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .content input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .content .button {
             background-color: #3174ea;
             color: white;
             border: none;
-            padding: 10px 20px;
-            width: 250px;
+            padding: 12px 20px;
+            width: 100%;
             cursor: pointer;
             font-size: 16px;
             border-radius: 4px;
             margin-top: 20px;
         }
 
-        .content button:hover {
+        .content .button:hover {
             background-color: #0056b3;
         }
+
+        .content p {
+            margin-top: 20px;
+        }
+
+        .content a {
+            color: #3174ea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .content a:hover {
+            text-decoration: underline;
+        }
+
         .footer {
             margin-top: 50px;
             padding: 30px 10% 10px;
@@ -197,7 +225,7 @@
 </div>
 <div class="content">
     <div class="box">
-        <h1>Forget Password</h1>
+        <h1>Quên mật khẩu</h1>
         <p>Một đoạn mã đã được gửi đến email của bạn. Vui lòng kiểm tra thư và nhập mã để xác nhận</p>
         <form action="${pageContext.request.contextPath}/login/forgetPassword" method="post">
             <label>
@@ -207,7 +235,7 @@
                 <p style="color:red" id="change">Sai mật mã</p>
             </c:if>
             <label>
-                <input type="submit" value="gửi email cho tôi">
+                <input type="submit" value="gửi email cho tôi" class="button">
             </label>
         </form>
         <p>Không nhận được mã</p>

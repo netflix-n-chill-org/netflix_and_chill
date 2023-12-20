@@ -213,34 +213,35 @@
 
     <form action="${pageContext.request.contextPath}/login" method="post">
         <c:if test="${isOnlineUser == true}">
-            <p style="color: red">User online in other application</p>
+            <p style="color: red">người dùng đã đăng nhập trên một trình duyệt khác</p>
         </c:if>
         <div class="input-box">
-            <input type="text" id="username" name="username" required oninput="getValue()" value="<%=username%>" />
+            <input type="text" id="username" name="username" required onchange="getValue()" value="<%=username%>" />
             <label>Email hoặc số điện thoại</label>
         </div>
         <c:if test="${auth == 0}">
-            <p style="color: red" id="not">Email not sign up</p>
+            <p style="color: red" id="not">Email chưa được đăng ký</p>
         </c:if>
         <div class="input-box">
-            <input type="password" name="password" required />
+            <input type="password" id="password" name="password" required />
             <label>Mật khẩu </label>
         </div>
-        <c:if test="${auth > 0 && auth < 6}" >
-            <p style="color: red">Wrong password ${auth} times</p>
+        <c:if test="${auth > 0 && auth < 5}" >
+            <p style="color: red">Bạn đã nhập sai mật khẩu ${auth} lần</p>
         </c:if>
-        <c:if test="${auth == 6}" >
-            <p style="color: red">Block user</p>
+        <c:if test="${auth == 5}" >
+            <p style="color: red">Bạn đã nhập sai password 5 lần </p>
+            <p style="color: red">Tài khoản đã bị khoá. <a href="login/blockUser.jsp">Tìm hiểu thêm</a></p>
         </c:if>
         <button type="submit">Đăng nhập</button>
 
         <div class="options">
             <div class="remember">
-                <input type="checkbox" id="remember" />
+                <input type="checkbox" name="rememberMe" value="true" id="remember" />
                 <label for="remember">Ghi nhớ tôi</label>
             </div>
-            <a href="${pageContext.request.contextPath}/login/forgetPassword?username=" id="forgetPass1">Quên mật khẩu</a>
-            <a href="${pageContext.request.contextPath}/login/forgetPassword?username=" id="forgetPass2">Cần trợ giúp</a>
+            <a href="${pageContext.request.contextPath}/login/formValidate" id="forgetPass1">Quên mật khẩu</a>
+            <a href="${pageContext.request.contextPath}/login/formValidate" id="forgetPass2">Cần trợ giúp</a>
         </div>
     </form>
 
@@ -249,13 +250,58 @@
         Quá trình đăng nhập được Google reCAPTCHA bảo vệ để đảm bảo bạn không phải là robot.
         <a href="#">Tìm hiểu thêm.</a>
     </small>
-</div>
+</div>`
 <script>
     function getValue() {
         const username = document.getElementById("username").value;
-        document.getElementById("forgetPass1").href += username;
-        document.getElementById("forgetPass2").href += username;
+        localStorage.setItem("usernameLogin", username);
+        document.getElementById("not").style.display = "none";
+        localStorage.setItem("email", username);
+
     }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        let fieldChange = false;
+        if ("<%=username%>" === "" ) {
+            document.getElementById("username").value = localStorage.getItem("email");
+            localStorage.setItem("usernameLogin", localStorage.getItem("email"));
+        } else {
+            localStorage.setItem("usernameLogin", "<%=username%>");
+            document.getElementById("username").value = "<%=username%>";
+        }
+
+
+        let auth = "<%= request.getAttribute("auth")%>";
+        // if (auth > 0 && auth < 5) {
+        //     fieldChange = true;
+        // }
+        console.log("username: " + getCookie("username"));
+        console.log("password: " + getCookie("password"));
+
+        if (!fieldChange && document.getElementById("username").value === getCookie("username")) {
+            if (getCookie("rememberMe") === "true") {
+                document.getElementById("username").value = getCookie("username");
+                document.getElementById("password").value = getCookie("password");
+            }
+        }
+
+        document.getElementById("username").addEventListener("onchange", function() {
+            localStorage.setItem("email", document.getElementById("username").value);
+        })
+
+    });
+
+    function getCookie(name) {
+        const cookies = document.cookie.split(';');
+        for (const cookie of cookies) {
+            const [cookieName, cookieValue] = cookie.trim().split('=');
+            if (cookieName === name) {
+                return decodeURIComponent(cookieValue);
+            }
+        }
+        return null;
+    }
+
 </script>
 </body>
 </html>

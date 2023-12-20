@@ -221,14 +221,16 @@
             kỳ lúc nào để tránh bị tính phí về sau.</p>
        <form method="post" action="/signup/mobileWalletOption">
         <div class="form-group-1">
-            <input type="checkbox" id="special-offers" name="special-offers" style="width: 20px;height: 20px">
+            <input type="checkbox" id="special-offers" name="special-offers" style="width: 20px;height: 20px" required>
             <label for="special-offers" class="special-offers" style="padding-left: 10px">Tôi dồng ý.</label>
         </div>
         <div class="phone-input-container">
             <div class="phone-prefix"></div>
-            <input type="tel" class="phone-input" placeholder="Nhập số điện thoại...">
+            <input type="tel" class="phone-input" name="phone" placeholder="Nhập số điện thoại...">
         </div>
-            <button class="button" style="color:white;" type="submit">Kích hoạt tư cách thành viên</button>
+           <p>Plan: ${plan}<a href="/signup/editPlan">Change</a></p>
+           <button class="button" style="color:white;" type="submit">Kích hoạt tư cách thành viên</button>
+<%--           <input type="submit" value="Kích hoạt tài khoản">--%>
 
         <p style="text-align: center;padding-top: 20px;padding-bottom: 100px">Bạn sẽ được chuyển đến MoMo để hoàn tất
             việc thanh toán.</p>

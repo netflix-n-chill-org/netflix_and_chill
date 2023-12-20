@@ -187,7 +187,7 @@
         .img-column img {
             display: block;
             width: 90%;
-            margin: auto;
+            margin: 20px auto auto;
         }
 
         .select h1 {
@@ -350,25 +350,26 @@
         <h3>Giải trí bất tận với giá chỉ từ 70.000 ₫. Hủy bất kỳ lúc nào.</h3>
         <p>Bạn đã sẵn sàng xem chưa? Nhập email để tạo hoặc kích hoạt lại tư cách thành viên của bạn.</p>
         <form class="email" action="${pageContext.request.contextPath}/main" method="post">
-            <input type="email" name="email" placeholder="Địa chỉ email" required oninput="change()">
-
-            <c:if test="${emailRegex == false}">
-               <p style="color: red">  Email không hợp lệ vui lòng nhập lại</p>
-            </c:if>
-            <c:if test="${isOnlineUser == true}">
-                <div class="error-message" id="change1">
-                    Tài khoản này đang hoạt động ở một thiết bị khác
-                </div>
-            </c:if>
-
+            <input type="email" name="email" id="email" placeholder="Địa chỉ email" required oninput="change()">
             <button type="submit" style="color:white">Bắt đầu ></button>
-        </form>
 
+        </form>
+    <div style="padding-top: 10px">
         <c:if test="${not empty sessionScope.emailExistsMessage}">
             <div class="error-message">${sessionScope.emailExistsMessage}</div>
             <c:remove var="emailExistsMessage" scope="session"/>
         </c:if>
+        <c:if test="${emailRegex == false}">
+            <p style="color: red">  Email không hợp lệ vui lòng nhập lại</p>
+        </c:if>
+        <c:if test="${isOnlineUser == true}">
+            <div class="error-message" id="change1">
+                Tài khoản này đang hoạt động ở một thiết bị khác
+            </div>
+        </c:if>
     </div>
+    </div>
+
 </div>
 
 <div class="content">
@@ -539,12 +540,14 @@
         });
     });
 
-    function change() {
-        const paragraphElement = document.getElementById("change");
-        paragraphElement.style.display = "none"
-        const paragraphElement1 = document.getElementById("change1");
-        paragraphElement1.style.display = "none"
-    }
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("email").addEventListener("onchange", function() {
+            console.log("input event");
+            localStorage.setItem("email", this.value);
+            document.getElementById("change1").style.display = "none";
+            document.getElementById("change").style.display = "none";
+        });
+    });
 </script>
 </body>
 </html>
