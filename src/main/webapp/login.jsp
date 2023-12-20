@@ -45,7 +45,7 @@
   <c:if test="${auth > 0 && auth < 6}" >
     <p style="color: red">Wrong password ${auth} times</p>
   </c:if>
-  <c:if test="${auth == 6}" >
+  <c:if test="${auth == 5}" >
     <p style="color: red">Block user</p>
   </c:if>
   <label>

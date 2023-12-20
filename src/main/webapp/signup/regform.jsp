@@ -125,6 +125,7 @@
             flex-wrap: wrap;
             line-height: 1.125rem;
             display: flex;
+            padding:10px 0;
         }
 
         label {
@@ -245,7 +246,7 @@
             </a>
         </div>
         <div class="right">
-            <button><a href="">Đăng nhập</a></button>
+            <button><a href="/login">Đăng nhập</a></button>
         </div>
     </nav>
 </div>
@@ -253,15 +254,15 @@
     <div class="instruction">
         <div class="step">BƯỚC 1/3</div>
         <h1>Tạo mật khẩu để bắt đầu tư cách thành viên của bạn</h1>
-        <form action="${pageContext.request.contextPath}/signup/regform" method="post">
+        <form id="myForm" action="${pageContext.request.contextPath}/signup/regform" method="post">
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" value="${emailSignUp}">
+                <input type="email" id="email" name="email" value="${email}">
                 <c:if test="${existEmail == true}">
-                    <p style="color: red">Email exist</p>
+                    <p style="color: red">Email đã tồn tại</p>
                 </c:if>
                 <c:if test="${emailCheck == false}">
-                    <p style="color:red">Wrong email syntax</p>
+                    <p style="color:red">Vui lòng nhập địa chỉ email hợp lệ.</p>
                 </c:if>
             </div>
             <div class="form-group">
@@ -275,7 +276,9 @@
             </div>
             <div class="form-group">
                 <label for="password">Mật khẩu</label>
-                <input type="password" id="password" name="password" placeholder="Nhập mật khẩu của bạn" oninput="check();change()" >            </div>
+                <input type="password" id="password" name="password" placeholder="Nhập mật khẩu của bạn" oninput="check();change()">
+                <p id="check" style="color: red; display: none">Mật khẩu phải từ 6 đến 60 ký tự.</p>
+            </div>
             <div class="form-group">
                 <label for="phone">Số điện thoại</label>
                 <input type="tel" id="phone" name="phone" placeholder="Nhập số điện thoại của bạn">
@@ -314,7 +317,8 @@
         </div>
     </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
     function handleCheckboxClick() {
         var checkbox = document.getElementById("special-offers");
         if (checkbox.checked) {
@@ -332,6 +336,20 @@
             document.getElementById("check").innerHTML = "Enter pass between 6 and 60 characters"
         }
     }
+
+    function handleSubmit(event) {
+        event.preventDefault();
+        check();
+        let pass = document.getElementById("password").value;
+        if (pass.length >= 6 && pass.length <= 60) {
+            event.target.submit();
+        }
+    }
+
+    let myForm = document.getElementById("myForm");
+
+    myForm.addEventListener("submit", handleSubmit);
+
 
     function check() {
         setTimeout(check1, 1000);

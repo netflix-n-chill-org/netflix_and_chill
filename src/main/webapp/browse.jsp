@@ -420,7 +420,7 @@
                     <div class="dropdown-content">
                         <a href="${pageContext.request.contextPath}/users">Link 1</a>
                         <a href="${pageContext.request.contextPath}/users"><c:out value="Chào mừng, ${sessionScope.loggedInUser.name}" /></a>
-                        <a href="${pageContext.request.contextPath}/users">Link 3</a>
+                        <a href="${pageContext.request.contextPath}/logout">Đăng xuất</a>
                     </div>
                 </c:if>
                 <c:if test="${sessionScope.loggedInUser == null}">
@@ -428,7 +428,7 @@
                     <div class="dropdown-content">
                         <a href="#">Link 1</a>
                         <a href="user/manager.jsp">Manager Profiles</a>
-                        <a href="#">Link 3</a>
+                        <a href="${pageContext.request.contextPath}/logout">Đăng xuất</a>
                     </div>
                 </c:if>
             </div>

@@ -361,7 +361,7 @@
             <li class="bottom-bar">Số lượng phim: 5</li>
             <li class="bottom-bar">Thưởng thức 1000 phút phim hấp dẫn</li>
             <li>
-                <input type="submit" name="plan" value="Đăng ký" class="btn">
+                <button type="submit" name="plan" value="basic" class="btn">Đăng ký</button>
            </li>
         </ul>
     </div>
@@ -373,8 +373,7 @@
             <li class="bottom-bar">Số lượng phim: 20</li>
             <li class="bottom-bar">Trải nghiệm 2000 phút phim đỉnh cao</li>
             <li>
-                <input type="submit" name="plan" value="Đăng ký" class="btn active-btn">
-        </li>
+                <button type="submit" name="plan" value="standard" class="btn btn-active">Đăng ký</button>        </li>
         </ul>
     </div>
     <div class="card shadow">
@@ -385,8 +384,7 @@
             <li class="bottom-bar">Số lượng phim: Không giới hạn</li>
             <li class="bottom-bar">Tận hưởng thế giới phim không giới hạn</li>
             <li>
-                <input type="submit" name="plan" value="Đăng ký" class="btn">
-
+                <button type="submit" name="plan" value="premium" class="btn">Đăng ký</button>
           </li>
         </ul>
     </div>

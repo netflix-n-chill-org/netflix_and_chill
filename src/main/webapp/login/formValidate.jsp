@@ -239,8 +239,14 @@
         }
     </style>
     <%
-        String email = request.getParameter("username");
-    %>
+        session = request.getSession();
+        String email = (String) session.getAttribute("email");
+        if (email == null) {
+            email = (String) request.getAttribute("emailSignIn");
+            if (email == null) {
+                email = "";
+            }
+        }    %>
 </head>
 <body>
 <div class="header">
@@ -257,7 +263,7 @@
 </div>
 <div class="content">
     <div class="box">
-        <form action="/login/forgetPassword?action=form" method="post" class="reset-form">
+        <form action="/login/formValidate" method="post" class="reset-form">
             <h1>Quên email/mật khẩu
             </h1>
             <p class="reset-option">Bạn muốn đặt lại mật khẩu bằng cách nào?</p>
@@ -268,8 +274,15 @@
             <p class="reset-instruction">Chúng tôi sẽ gửi cho bạn mã xác thực qua tin nhắn để đặt lại mật khẩu của bạn. Bạn có thể phải trả phí tin nhắn hoặc dữ liệu.
                 .</p>
             <div class="input-group">
-                <input type="email" name="emailAddress" value="<%=email%>">
+                <input type="email" name="emailAddress" id="email" value="<%=email%>" onchange="change()">
             </div>
+            <c:if test="${isUser == false}">
+                <p style="color: red;" id="notSignIn">Tài khoản chưa đăng ký</p>
+            </c:if>
+            <c:if test="${isBlockedUser == true}">
+                <p style="color: red;" id="notSignIn">Tài khoản đã bị khoá</p>
+            </c:if>
+
             <input type="submit" value="Gửi email cho tôi">
             <p style="padding-top: 20px;text-align: left"><a href="#">I don't remember my email or phone.</a></p>
         </form>
@@ -298,5 +311,14 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function (){
+        document.getElementById("email").value = localStorage.getItem("usernameLogin");
+    })
+
+    function change() {
+        localStorage.setItem("usernameLogin", document.getElementById("email").value)
+    }
+</script>
 </body>
 </html>

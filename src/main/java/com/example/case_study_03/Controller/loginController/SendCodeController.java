@@ -16,12 +16,16 @@ import java.io.IOException;
 public class SendCodeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doPost(req, resp);
-    }
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        User user = (User) session.getAttribute("forgetUser");
-        LoginManager.getInstance().sendCodeEmail(user.getEmail());
+        try {
+            User user = (User) session.getAttribute("forgetUser");
+            LoginManager.getInstance().sendCodeEmail(user.getEmail());
+            session.setAttribute("forgetPassStep", 3);
+            resp.sendRedirect("/login/forgetPassword");
+
+        } catch (NullPointerException e) {
+            resp.sendRedirect("/login");
+        }
     }
+
 }

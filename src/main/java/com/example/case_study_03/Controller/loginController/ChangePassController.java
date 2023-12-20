@@ -18,12 +18,22 @@ import java.sql.SQLException;
 @WebServlet("/login/changePass")
 
 public class ChangePassController extends HttpServlet {
-    UserDAO userDAO = new UserDAO(MyConnection.getConnection());
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher dispatcher = req.getRequestDispatcher("changePassword.jsp");
-        dispatcher.forward(req,resp);
+        HttpSession session = req.getSession();
+        try {
+            if ((int) session.getAttribute("forgetPassStep") >= 2) {
+                RequestDispatcher dispatcher = req.getRequestDispatcher("changePassword.jsp");
+                dispatcher.forward(req,resp);
+            } else {
+                resp.sendRedirect("/login");
+            }
+        } catch (NullPointerException e) {
+            resp.sendRedirect("/login");
+        }
+
     }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String newPass = req.getParameter("newPass");
@@ -31,6 +41,7 @@ public class ChangePassController extends HttpServlet {
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("forgetUser");
         if (newPassAgain.equals(newPass)) {
+            UserDAO userDAO = new UserDAO(MyConnection.getConnection());
             UserService userService = new UserService(userDAO);
             user.setPassword(newPass);
             try {

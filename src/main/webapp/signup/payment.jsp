@@ -83,6 +83,14 @@
         }
 
     </style>
+    <script>
+        function submitFormWithDelay() {
+            document.getElementById("paymentForm").submit();
+            setTimeout(function () {
+                window.location.href = "/browse";
+            }, 3000);
+        }
+    </script>
 </head>
 <body>
 <div class="background-container"></div>
@@ -102,6 +110,9 @@
     <div class="expiry">
         <p>Đơn hàng sẽ hết hạn sau: 07:03</p>
     </div>
+    <form id="paymentForm" action="/momo" method="post">
+        <input type="submit" value="Thanh toán" style="display: none;">
+    </form>
     <p>Gặp khó khăn khi thanh toán? Xem Hướng dẫn</p>
     <a href="#" class="button">Quay về</a>
 </div>
@@ -113,5 +124,10 @@
         <p>hotro@momo.vn</p>
     </div>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        submitFormWithDelay();
+    });
+</script>
 </body>
 </html>

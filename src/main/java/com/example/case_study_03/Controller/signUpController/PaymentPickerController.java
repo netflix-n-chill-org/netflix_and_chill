@@ -3,9 +3,7 @@ package com.example.case_study_03.Controller.signUpController;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 
 @WebServlet("/signup/paymentPicker")
@@ -13,14 +11,33 @@ import java.io.IOException;
 public class PaymentPickerController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher dispatcher = req.getRequestDispatcher("paymentPicker.jsp");
-        dispatcher.forward(req, resp);
+        HttpSession session = req.getSession();
+        RequestDispatcher dispatcher;
+        try {
+            if (Integer.parseInt((String) session.getAttribute("signUpStep")) < 5) {
+                resp.sendRedirect("/signup/planform");
+            } else {
+                dispatcher = req.getRequestDispatcher("paymentPicker.jsp");
+                dispatcher.forward(req, resp);
+            }
+        } catch (NumberFormatException e) {
+            resp.sendRedirect("/main");
+        }
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String paymentForm = req.getParameter("paymentForm");
+        Cookie lastStep = new Cookie("lastStep", "2");
+        resp.addCookie(lastStep);
+        HttpSession session = req.getSession();
+        session.setAttribute("signUpStep", "6");
+//        if (paymentForm.equals("wallet")) {
+//            resp.sendRedirect("/signup/mobileWalletOption");
+//        } else {
+//            RequestDispatcher dispatcher = req.getRequestDispatcher("paymentPicker.jsp");
+//            dispatcher.forward(req, resp);
+//        }
+
         resp.sendRedirect("/signup/mobileWalletOption");
-
-
     }
 }
