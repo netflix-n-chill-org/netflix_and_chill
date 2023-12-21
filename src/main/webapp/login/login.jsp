@@ -268,6 +268,11 @@
     }
 
 
+        document.getElementById("not").style.display = "none";
+        localStorage.setItem("email", username);
+
+    }
+
     document.addEventListener("DOMContentLoaded", function() {
         let fieldChange = false;
         if ("<%=username%>" === "" ) {
