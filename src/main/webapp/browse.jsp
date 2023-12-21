@@ -411,13 +411,13 @@
         <div class="right">
             <p style="color: rgba(243, 243, 243, 0.85); ">Trẻ em</p>
             <a href="#"><img src="https://cdn.picpng.com/bell/bell-notification-communication-67055.png" alt="Icon thông báo"></a>
-            <div class="dropdown">
+            <div class="dropdown"onclick="toggleDropdownF(this)">
                 <c:if test="${sessionScope.loggedInUser != null}">
 
-                  <a href="${pageContext.request.contextPath}/users" >
+                  <a href="#" >
                     <img src="img/red.jpg" alt="Hình đại diện người dùng" class="dropbtn">
                   </a>
-                    <div class="dropdown-content">
+                    <div class="dropdown-content" >
                         <a href="${pageContext.request.contextPath}/users">Link 1</a>
                         <a href="${pageContext.request.contextPath}/users"><c:out value="Chào mừng, ${sessionScope.loggedInUser.name}" /></a>
                         <a href="${pageContext.request.contextPath}/logout">Đăng xuất</a>
@@ -623,5 +623,24 @@
         </div>
     </div>
 </div>
+<script>
+    let isDropdownOpen = false;
+
+    function toggleDropdownF(dropdown) {
+        isDropdownOpen = !isDropdownOpen;
+
+        if (isDropdownOpen) {
+            dropdown.classList.add('active');
+        } else {
+            dropdown.classList.remove('active');
+        }
+    }
+
+    function toggleDropdown() {
+        var dropdownList = document.querySelector('.profile-dropdown-list');
+        dropdownList.style.display = dropdownList.style.display === 'none' ? 'block' : 'none';
+    }
+
+</script>
 </body>
 </html>

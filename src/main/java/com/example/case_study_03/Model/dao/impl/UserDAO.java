@@ -21,8 +21,7 @@ public class UserDAO implements IUtilityUserDAO {
     private static final String SELECT_USER_BY_ID = "SELECT name, phone, email from USER where id = ? and status = 0;";
     private static final String SHOW_ALL_USERS = "SELECT id, name, phone, email FROM user where status = 0;";
     private static final String SHOW_USERNAME_PASSWORD = "SELECT * from user where status = 0;";
-        private final static String SELECT_USER_BY_USERNAME = "select * from user where ( username = ? or email = ?) and status = 0;";
-
+    private final static String SELECT_USER_BY_USERNAME = "select * from user where ( username = ? or email = ? or phone = ?) and status = 0;";
     private Connection connection;
 
     public UserDAO(Connection connection) {
@@ -186,6 +185,7 @@ public class UserDAO implements IUtilityUserDAO {
             PreparedStatement ps = connection.prepareStatement(SELECT_USER_BY_USERNAME);
             ps.setString(1, username);
             ps.setString(2, username);
+            ps.setString(3, username);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");

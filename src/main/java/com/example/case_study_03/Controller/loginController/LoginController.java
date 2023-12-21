@@ -13,7 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
-import java.util.Objects;
+
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -69,10 +69,7 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("signInStep", "2");
                 try {
                     String rememberMe = req.getParameter("rememberMe");
-
                     if (rememberMe.equals("true")) {
-
-
                         Cookie usernameCookie = new Cookie("username", username);
                         Cookie passwordCookie = new Cookie("password", password);
                         Cookie rememberMe1 = new Cookie("rememberMe", "true");
@@ -80,12 +77,10 @@ public class LoginController extends HttpServlet {
                         usernameCookie.setMaxAge(365 * 24 * 60 * 60);
                         passwordCookie.setMaxAge(365 * 24 * 60 * 60);
                         rememberMe1.setMaxAge(365 * 24 * 60 * 60);
-
                         // Thêm cookie vào phản hồi
                         resp.addCookie(usernameCookie);
                         resp.addCookie(passwordCookie);
                         resp.addCookie(rememberMe1);
-
                     }
                 } catch (NullPointerException ignored) {
 

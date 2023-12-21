@@ -536,7 +536,7 @@
                         <i class="fa-solid fa-circle"></i>
                     </div>
                     <span>
-                       <c:out value="${loggedInUser.getName()}"/>
+                       <c:out value="${sessionScope.loggedInUser.getName()}"/>
                       <i class="fa-solid fa-angle-down"></i>
                     </span>
                 </div>
@@ -573,7 +573,7 @@
                     </li>
                     <hr>
                     <li class="profile-dropdown-list-item">
-                        <a href="#">
+                        <a href="${pageContext.request.contextPath}/logout">
                             <i class="fa-solid fa-arrow-right-from-bracket"></i>
                             Log out
                         </a>
