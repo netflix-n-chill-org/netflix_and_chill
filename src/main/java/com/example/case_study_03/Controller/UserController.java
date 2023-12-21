@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -107,30 +108,37 @@ public class UserController extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User loggedInUser = (User) session.getAttribute("loggedInUser");
+
         String action = request.getParameter("action");
         if (action == null) {
             action = "";
         }
-        try {
-            switch (action) {
-                case "add":
-                    showAddForm(request, response);
-                    break;
-                case "update":
-                    showUpdateForm(request, response);
-                    break;
-                case "delete":
-                    deleteUser(request, response);
-                    break;
-                case "view":
-                    viewUser(request,response);
-                    break;
-                default:
-                    listUser(request, response);
-                    break;
+        if(loggedInUser!=null) {
+            try {
+                switch (action) {
+                    case "add":
+                        showAddForm(request, response);
+                        break;
+                    case "update":
+                        showUpdateForm(request, response);
+                        break;
+                    case "delete":
+                        deleteUser(request, response);
+                        break;
+                    case "view":
+                        viewUser(request, response);
+                        break;
+                    default:
+                        listUser(request, response);
+                        break;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        }else {
+            response.sendRedirect("/main");
         }
     }
 

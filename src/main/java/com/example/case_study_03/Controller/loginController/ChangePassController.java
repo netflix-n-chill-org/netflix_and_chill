@@ -8,10 +8,7 @@ import com.example.case_study_03.Model.service.UserService;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -40,6 +37,7 @@ public class ChangePassController extends HttpServlet {
         String newPassAgain = req.getParameter("newPassAgain");
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("forgetUser");
+        session.setAttribute("email", user.getEmail());
         if (newPassAgain.equals(newPass)) {
             UserDAO userDAO = new UserDAO(MyConnection.getConnection());
             UserService userService = new UserService(userDAO);
@@ -49,6 +47,32 @@ public class ChangePassController extends HttpServlet {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+            Cookie[] cookies = req.getCookies();
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("username")) {
+                    cookie.setMaxAge(0);
+                    cookie.setPath("/");
+                    resp.addCookie(cookie);
+                    if (cookie.getValue().equals(user.getEmail())) {
+                        for (Cookie cookie1 : cookies) {
+                            if (cookie1.getName().equals("rememberMe")) {
+                                cookie1.setMaxAge(0);
+                                cookie1.setPath("/");
+                                resp.addCookie(cookie1);
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                }
+            }
+
+//            PrintWriter writer = resp.getWriter();
+//            writer.write("<html>");
+//            writer.write("<h1>Change password success</h1>");
+//            writer.write("</html>");
+
+            resp.sendRedirect("/login");
         } else {
             RequestDispatcher dispatcher = req.getRequestDispatcher("changePassword.jsp");
             req.setAttribute("isNotCatch", true);

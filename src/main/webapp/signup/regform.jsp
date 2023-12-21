@@ -264,6 +264,8 @@
                 <c:if test="${emailCheck == false}">
                     <p style="color:red">Vui lòng nhập địa chỉ email hợp lệ.</p>
                 </c:if>
+                <p style="color:red;font-size:15px" id="emailError"></p>
+                <p style="color:red;font-size:15px" id="emailError2"></p>
             </div>
             <div class="form-group">
                 <label for="name">Họ và tên</label>
@@ -273,6 +275,7 @@
                 <label for="username">Tài khoản</label>
                 <input type="text" id="username" name="username" class="form-input"
                        placeholder="Nhập tài khoản của bạn">
+                <p style="color: red;font-size: 15px" id="usernameError"></p>
             </div>
             <div class="form-group">
                 <label for="password">Mật khẩu</label>
@@ -282,6 +285,8 @@
             <div class="form-group">
                 <label for="phone">Số điện thoại</label>
                 <input type="tel" id="phone" name="phone" placeholder="Nhập số điện thoại của bạn">
+                <p id="phoneError2" style="color: red;font-size: 15px"></p>
+                <p id="phoneError" style="color: red;font-size: 15px"></p>
             </div>
             <div class="form-group-1">
                 <input type="checkbox" id="special-offers" name="special-offers" value="on"
@@ -357,6 +362,108 @@
 
     function change() {
         document.getElementById("check").style.display = "none";
+    }
+    function validateEmail() {
+        let emailInput = document.getElementById('email');
+        let emailValue = emailInput.value;
+        let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+        let emailRegex1 = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+        if (emailRegex1.test(emailValue)) {
+            document.getElementById('emailError').innerHTML = '';
+        } else {
+            document.getElementById('emailError').innerHTML = 'Email không hợp lệ';
+        }
+        console.log("validate email success");
+    }
+
+
+    function validatePhone() {
+        let phoneInput = document.getElementById('phone');
+        let phoneValue = phoneInput.value;
+        let phoneRegex = /^(0[35789])+([0-9]{8})$/;
+
+        if (!phoneRegex.test(phoneValue)) {
+            document.getElementById('phoneError').innerHTML = 'Số điện thoại không hợp lệ';
+        }
+        console.log("validate phone success");
+    }
+
+    document.getElementById("username").addEventListener("change", checkUsernameAvailability);
+    document.getElementById("phone").addEventListener("change", validatePhone);
+    document.getElementById("phone").addEventListener("change", checkPhoneAvailability);
+    document.getElementById("email").addEventListener("change", validateEmail);
+
+    function checkUsernameAvailability() {
+        let usernameInput = document.getElementById('username');
+        let usernameValue = usernameInput.value;
+
+        let xhr = new XMLHttpRequest();
+
+        let url = '/checkUsernameAvailability?username=' + encodeURIComponent(usernameValue);
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var response = xhr.responseText;
+
+                if (response === 'true') {
+                    document.getElementById('usernameError').innerHTML = 'Tài khoản đã tồn tại';
+                }
+                else{
+                    document.getElementById('usernameError').innerHTML = '';
+
+                }
+            }
+        };
+
+        xhr.open('GET', url, true);
+        xhr.send();
+        console.log("validate username success");
+    }
+    function checkEmailAvaibility() {
+        let emailInput = document.getElementById('email');
+        let emailValue = emailInput.value;
+        let xhr = new XMLHttpRequest();
+        let url = '/checkPhoneAvailability?email' + encodeURIComponent(emailValue);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let response = xhr.responseText;
+
+                if (response === 'true') {
+                    document.getElementById('emailError2').innerHTML = 'Số điện thoại đã tồn tại';
+                } else {
+                    document.getElementById('emailError2').innerHTML = '';
+                }
+            }
+
+        }
+    }
+    function checkPhoneAvailability() {
+        let phoneInput = document.getElementById('phone');
+        let phoneValue = phoneInput.value;
+
+        let xhr = new XMLHttpRequest();
+
+        let url = '/checkPhoneAvailability?phone=' + encodeURIComponent(phoneValue);
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let response = xhr.responseText;
+
+                if (response === 'true') {
+                    document.getElementById('phoneError2').innerHTML = 'Số điện thoại đã tồn tại';
+                }
+                else {
+                    document.getElementById('phoneError2').innerHTML = '';
+                }
+            }
+
+        };
+
+        xhr.open('GET', url, true);
+        xhr.send();
+        console.log("validate phone2 success");
     }
 </script>
 </body>
